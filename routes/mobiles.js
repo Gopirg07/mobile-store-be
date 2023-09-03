@@ -2,8 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 const mongoose = require("mongoose");
-const { dbUrl } = require("../common/dbConfig"); 
-const { validate } = require("../common/auth");
+const { dbUrl } = require("../common/dbConfig");  
 const { MobileModel } = require("../schemas/mobileSchemas");
 mongoose.connect(dbUrl);
 
@@ -22,7 +21,7 @@ router.post("/addMobile", async function (req, res) {
   router.get("/", async function (req, res, next) {
   try {
     let data= await MobileModel.find({})
-    res.status(200).send({message:"Movie Reviews Fetched Successfully",data}) 
+    res.status(200).send({message:"Mobiles Fetched Successfully",data}) 
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error", error });
   }
@@ -33,7 +32,7 @@ router.get("/getMobile/:id", async function (req, res, next) {
   try {
     let data= await MobileModel.find({_id:req.params.id})
     console.log(data);
-    res.status(200).send({message:"Movie Review's Data Fetched Successfully",data}) 
+    res.status(200).send({message:"Mobile's Data Fetched Successfully",data}) 
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error", error });
   }
@@ -44,7 +43,7 @@ router.put("/updateMobile/:id", async function (req, res, next) {
   try {
     let data= await MobileModel.findOneAndUpdate({_id:req.params.id},req.body)      
     console.log(data);
-    res.status(200).send({message:"Movie Review's Data Fetched Successfully",data}) 
+    res.status(200).send({message:"Updated Mobile's Data Fetched Successfully",data}) 
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error", error });
   }
@@ -56,7 +55,7 @@ router.delete("/deleteMobile/:id",async function(req,res){
   try {
     let data=await MobileModel.deleteOne({_id:req.params.id})
     console.log(req.params.id)
-    res.status(200).send({message: "A Movie Review Deleted Successfully", data});
+    res.status(200).send({message: "Mobile Deleted Successfully", data});
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error", error });
   }
